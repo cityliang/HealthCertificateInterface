@@ -8,21 +8,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-/**
- * 传输xml标准头信息(DSCR)
- */
+
 @Data
 @NoArgsConstructor
-@XmlRootElement(name="HEAD")
+@XmlRootElement(name="REQUEST")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Head implements Serializable {
+public class CyryQRcode implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private String user_id;
-	private String password;
-	private String trans_id;
-	private String busi_type;
-	private String busi_version; //业务数据版本
-	private String opt_type;//操作类型
-	private String is_test;//是否测试
-	
+	/** 记录ID，可传任意值 */
+	private String ID;
+	private String QRCODE;
 }

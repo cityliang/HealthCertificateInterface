@@ -1,13 +1,35 @@
 package com.huntto.server.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.huntto.server.model.cyry.CyryQRIMG;
+import com.huntto.server.model.cyry.CyryVo1;
 import com.huntto.server.model.cyry.OlexamCyryJbxx;
 
 @Mapper
 @Repository
 public interface CyryDao {
+	
+	/**
+	 * 
+	 * @Title  selectQRCODE1 
+	 * @Description  通过人员ID 查询该人员二维码
+	 * @param ID ID
+	 * @return  List<CyryQRIMG>
+	 */
+	List<CyryQRIMG> selectQRCODE(String ID);
+	
+	/**
+	 * 
+	 * @Title  selectCYRYVo1 
+	 * @Description  通过身份证号查询从业人员信息
+	 * @param idcard 身份证号
+	 * @return  List<CyryVo1>
+	 */
+	List<CyryVo1> selectCYRYVo1(String idcard);
 	
 	int InsertModels(OlexamCyryJbxx models,String userid)throws Exception;
 	

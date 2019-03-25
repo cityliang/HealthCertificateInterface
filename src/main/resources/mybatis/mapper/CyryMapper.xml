@@ -51,9 +51,21 @@
         		where rownum=1 and t.idcard = #{idcard}
 	</select> -->
 	
+	<select id="selectQRCODE" parameterType="java.lang.String" resultType="com.huntto.server.model.cyry.CyryQRIMG">
+		select qr.QRIMG from XZXK_QRCODE qr
+				where qr.mid = #{ID} 
+        			order by qr.CREATE_TIME desc
+	</select>
+	
+	<select id="selectCYRYVo1" parameterType="java.lang.String" resultMap="CYRYVOMap1">
+		select t.ID,t.BH,t.XM,t.XB,t.NL,t.LB,t.TJJG,t.FZSJ,t.FZJG,t.IDCARD,t.PHOTO from CYRYQUERY t
+				where t.idcard = #{idcard} 
+        			order by t.FZSJ desc
+	</select>
+	
 	<insert id="InsertModels" >
-		insert into OLEXAM_CYRY_JBXX(ID,FBType,FBContent,IDCARD,CREATE_TIME,IS_CL,MEDI_INTID) 
-			values(#{ID},#{FBType},#{FBContent},#{IDCARD},TO_DATE(#{CREATE_TIME},'YYYY-MM-DD hh24:mi:ss'),#{IS_CL},#{MEDI_INTID})
+		insert into OLEXAM_CYRY_JBXX(ID,IS_DELETE,FBContent,IDCARD,CREATE_TIME,IS_CL,MEDI_INTID) 
+			values(#{ID},0,#{FBContent},#{IDCARD},TO_DATE(#{CREATE_TIME},'YYYY-MM-DD hh24:mi:ss'),#{IS_CL},#{MEDI_INTID})
 			<!-- Oracle 插入字符串 时间 -->
 			<!-- values(#{ID},#{FBType},#{FBContent},#{CREATE_TIME}) -->
 			<!-- Oracle 语句 插入系统时间 -->
@@ -82,6 +94,22 @@
 	<select id="findLogin" resultType="boolean" databaseId="mysql" >
 		select * from OLEXAM_PHYSICAL_EXAM_USER where user_id=#{user_id} and password = #{psw}
 	</select>
+	
+	<resultMap id="CYRYVOMap1" type="com.huntto.server.model.cyry.CyryVo1">
+		<result column="ID" property="ID" />
+		<result column="BH" property="BH" />
+		<result column="XM" property="XM" />
+		<result column="XB" property="XB" />
+		<result column="NL" property="NL" />
+		<result column="LB" property="LB" />
+		<result column="TJJG" property="TJJG" />
+		<result column="FZSJ" property="FZSJ" />
+		<result column="FZJG" property="FZJG" />
+		<result column="IDCARD" property="IDCARD" />
+		
+		<result column="QRIMG" property="QRIMG" />
+		<result column="PHOTO" property="PHOTO" />
+	</resultMap>
 	
 	<!-- <resultMap id="CyryVO1Map" type="com.huntto.entity.CyryVo1">
 		<result column="ID" property="ID" />
